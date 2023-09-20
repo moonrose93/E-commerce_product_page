@@ -284,6 +284,21 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
 }
 
+.icon-delete{
+    position: absolute;
+    left:320px;
+    bottom: -140px;
+    cursor: pointer;
+}
+
+.icon-delete-mobile{
+    position: absolute;
+    left:290px;
+    bottom: -140px;
+    cursor: pointer;
+}
+
+
 .checkout-btn{
     position:absolute;
     left:40px;
@@ -493,7 +508,7 @@ margin-right: 20px;
     margin-top: 110px;
     z-index: 3;
     font-size: 1rem;
-    display: none;
+    
 }
 
 
@@ -591,8 +606,8 @@ margin-right: 20px;
     position: absolute;
     left: 258px;
     top: 15px;
-    z-index: 2;
-    display: block;
+   
+    
    
     
 }
