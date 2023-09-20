@@ -41,7 +41,7 @@ const emptyNotificationMobile = document.getElementById("empty-mobile");
 const notificationMobile = document.getElementById("notification-mobile");
 const cardItemAddedMobile = document.getElementById("cart-item-added-mobile");
 const cartIconMobile= document.getElementById("cart-icon-mobile");
-const addToCartbtnMobile = document.getElementById("add-to-cart");
+const addToCartbtnMobile = document.getElementById("add-to-cart-mobile");
 const iconPreviousMobile = document.getElementById("previous-mobile");
 const iconNextMobile = document.getElementById("next-mobile");
 const menuBtnMobile = document.getElementById("icon-menu");
@@ -76,10 +76,13 @@ btnMinusMobile.addEventListener("click", () => {
   }
 });
 
-// Event listener for adding to cart on mobile
-addToCartbtnMobile.addEventListener("click", () => {
-  notificationMobile.innerText = quantityPriceValueMobile;
-});
+
+  // Your code here, including the event listener assignment
+  addToCartbtnMobile.addEventListener("click", () => {
+    notificationMobile.innerText = quantityPriceValueMobile;
+  });
+
+
 
 // Event listener for opening the cart popup on mobile
 cartIconMobile.addEventListener("click", () => {
