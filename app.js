@@ -54,21 +54,27 @@ const product3Mobile = document.getElementById("product3");
 const product4Mobile = document.getElementById("product4");
 
 
-// Mobile version quantity price value
+// 1.Mobile version - Plus and minus buttons and dynamically changing of the quantity price in the middle based on the clicked button
+
+/*first we set a variable for starting value which its 0 in this case, then we create a function updateQuantityPriceMobile() in wich we set the quantity price text content equal
+to the quantity price variable we created ( quantityPriceValueMobile).With this we dynamiclly will update the quantity price. */
+
 let quantityPriceValueMobile = 0;
 
-// Function to update the quantity price for mobile
+//Creating a function to set it to the button event listeners so that the text content will change dynamically.
 function updateQuantityPriceMobile() {
   quantityPriceMobile.textContent = quantityPriceValueMobile;
 }
 
-// Event listener for the plus button on mobile
+/*Then we add event listener to the + button and when clicked the quantityPriceValueMobile++; will increase by 1 starting from 0.also in this function
+we call the function where we set the quantity price textcontent equal to the variable quantityPriceValueMobile with this the text content of the quantityPriceMobile will change dynamically.*/
 btnPlusMobile.addEventListener("click", () => {
   quantityPriceValueMobile++;
   updateQuantityPriceMobile();
 });
 
-// Event listener for the minus button on mobile
+/*same for the minus button if the quantityPriceValueMobile is bigger then 0 then on the click on the minus button the value will decrease and with that the  quantityPriceMobile.textContent
+will change dynamically bacause we called the function updateQuantityPriceMobile(); inside the btnMinusMobile.addEventListener */
 btnMinusMobile.addEventListener("click", () => {
   if (quantityPriceValueMobile > 0) {
     quantityPriceValueMobile--;
@@ -76,15 +82,24 @@ btnMinusMobile.addEventListener("click", () => {
   }
 });
 
+/*Wrap up: we set the updateQuantityPriceMobile(); in every button so that the value of text will change depending on which button is clicked.Also we create a variable = 0 so that its 
+initial value for starting and that value with clicked on + button will increase by 1  (quantityPriceValueMobile++;) or decease by 1 if clicked on - button */
 
-  // Your code here, including the event listener assignment
+
+
+/*2.When clicked on the add to cart button the notification (0-orange HTML p text will change based on the  quantityPriceValueMobile)- If the  quantityPriceValueMobile variable
+incrases then the innerTxt of the Notification will change based on the value of the quantityPriceVariable if increases 3 times and then its click on th button then the notification 
+will change based on the value of the increasion.*/
+
   addToCartbtnMobile.addEventListener("click", () => {
     notificationMobile.innerText = quantityPriceValueMobile;
   });
 
 
 
-// Event listener for opening the cart popup on mobile
+/*3.Here we set listener on the cartIcon when clicked on the icon the hiddend div from css cartPopupnotMobile will show up ,
+first we set condition if (cartPopupnotMobile.style.display === "none") ,which it is in css when clicked on the button to to be dispayed to block(to be visible)after its visible 
+we set the else statment again on the next click on the icon to be displayed none*/
 cartIconMobile.addEventListener("click", () => {
   if (cartPopupnotMobile.style.display === "none") {
     cartPopupnotMobile.style.display = "block";
@@ -92,54 +107,73 @@ cartIconMobile.addEventListener("click", () => {
     cartPopupnotMobile.style.display = "none";
   }
 
+
+  /*4.Here we set conditions for the  emptyNotification , if quantityPriceValueMobile === 0 then the emptyNotificationMobile to be shown inside the cartPopup and
+  the cardItemAddedMobile(divot so prikazhani items da bide skrien) to be hidden else (ako e drugo- na pr quantityPriceValueMobile > 0 togas emptyNotificationMobile to be hidden)  */
   if (quantityPriceValueMobile === 0) {
     emptyNotificationMobile.style.display = "block";
     cardItemAddedMobile.style.display = "none";
   } else {
     emptyNotificationMobile.style.display = "none";
   }
-
+/*5. if quantityPriceValueMobile value  is bigger then 0 then  emptyNotificationMobile to be hidden and cardItemAddedMobile div to be displayed*/
+  
   if (quantityPriceValueMobile > 0) {
     emptyNotificationMobile.style.display = "none";
     cardItemAddedMobile.style.display = "block";
   }
 });
 
-// Event listener for deleting an item in the cart on mobile
+/*6.When clicked on the delete icon ardItemAddedMobile that to be hidden and  emptyNotificationMessage to be displayed */
 deleteElementIconMobile.addEventListener("click", () => {
   cardItemAddedMobile.style.display = "none";
   emptyNotificationMobile.style.display = "block";
 });
 
-// Mobile version image navigation (previous and next)
-iconNextMobile.addEventListener("click", () => {
-  // Implement your logic for displaying the next image here
+/*7. We created an array of the images we want to be slided and initialized it as productsMobileImages also we created a variable for staring index for the array 
+ productIndex which is 0 so the array will start counting from 0.(from the first element)*/
+
+let productsMobileImages = [product1Mobile,product2Mobile,product3Mobile,product4Mobile];
+let productIndex = 0;
+
+/*When clicked on the next button the productsMobileImages array will start from 0 we linked the array with the index (productsMobileImages[productIndex]),
+that would be the first element and that element will be hidden (current element)and as the productIndex increase by 1 the next image will be shown and every current image with every
+click will be hidden */
+
+//Here with every click on the next button the current image from the array will be hidden and after increasing the array by 1 the increased element will be shown. until the end of the array.
+/*On every click on nect button the current image from the array to be hidden and and every next image from the array to be displa */
+iconNextMobile.addEventListener("click",()=>{
+  productsMobileImages[productIndex].style.display = "none";//To hide the current image(index)
+  //We manipulate the product index to increase from the array length by 1
+  productIndex = (productIndex + 1) % productsMobileImages.length;//on every click new image from the array to be shown wrapping up the end of the arry.
+  productsMobileImages[productIndex].style.display = "block";
+
 });
+
+/*When clicked on the previous button the productsMobileImages array will start decreaseing by 1 until the beginning of the array and every current image will be hidden and every
+decerad image backwards will be displayeed */
 
 iconPreviousMobile.addEventListener("click", () => {
-  // Implement your logic for displaying the previous image here
+    productsMobileImages[productIndex].style.display = "none";//To hide the current image(index)
+    //We manipulate the product index to decrase from the array length by1
+    productIndex = (productIndex - 1 + productsMobileImages.length) % productsMobileImages.length;//on every click new image from the array to be shown wrapping up the end of the arry.
+    productsMobileImages[productIndex].style.display = "block";
 });
 
-// Mobile version menu button click event
+// Mobile version menu button click event for when we click on the menu burger icon the hidden menu from css to shown
 menuBtnMobile.addEventListener("click", () => {
   // Implement your menu toggle logic for the mobile version here
     menuMobile.style.display = "block";
   
 });
 
+// Mobile version menu button click event for when we click on the icon close from the menu the menu to be hidden.
+
 iconCloseMobile.addEventListener("click", () =>{
   menuMobile.style.display = "none";
 });
 
-let productsMobileImages = [product1Mobile,product2Mobile,product3Mobile,product4Mobile];
-let productIndex = 0;
 
-iconNextMobile.addEventListener("click",()=>{
-  productsMobileImages[productIndex].style.display = "none";//To hide the current image
-  productIndex = (productIndex + 1) % productsMobileImages.length;//on every click new image from the array to be shown wrapping up the end of the arry.
-  productsMobileImages[productIndex].style.display = "block";
-
-})
 
 //For desktop
 
